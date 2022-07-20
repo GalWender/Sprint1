@@ -1,0 +1,108 @@
+html {
+    background-color: rgb(227, 137, 137);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.table {
+    position: absolute;
+    left: 500px;
+    top: 250px;
+    height: 530px;
+    width: 530px;
+    background-color: rgb(224, 73, 73);
+    cursor: pointer;
+    text-align: center;
+    /* font-size: 20px; */
+    /* text-shadow: 20px; */
+    border: 300px;
+}
+/* .cell{
+    height: 50px;
+    width: 50px;
+} */
+span{
+    /* height: 50px;
+    width: 50px; */
+    /* padding: 60px; */
+    /* margin: auto; */
+}
+tbody{
+    /* position: absolute; */
+    /* margin: auto; */
+    /* padding: 100px; */
+
+}
+td{
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+}
+
+.header {
+    top: 0px;
+    left: 460px;
+    position: absolute;
+    font-size: 50px;
+    font-style: italic;
+    text-align: center;
+    height: 20px;
+    width: 600px;
+    
+}
+
+.timer1 {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    border-radius: 35px;
+    background-color: mediumseagreen;
+    padding: 10px;
+    border: 2px solid green;
+    padding-bottom: 50px;
+    font-style: oblique;
+    font-weight: bold;
+    left: 480px;
+    top: 160px;
+}
+
+.restart {
+    position: absolute;
+    height: 50px;
+    width: 70px;
+    border-radius: 35px;
+    background-color: indianred;
+    cursor: pointer;
+    left: 700px;
+    top: 160px;
+    border: 2px solid rgb(226, 69, 69);
+}
+
+.levels {
+    position: absolute;
+    height: 50px;
+    width: 250px;
+    text-align: center;
+    border-radius: 35px;
+    background-color: indianred;
+    padding: 10px;
+    border: 2px solid rgb(226, 69, 69);
+    padding-bottom: 50px;
+    left: 790px;
+    top: 160px;
+}
+
+.levels button {
+    margin-left: 5px;
+    padding: 10px;
+    border-radius: 40px;
+    height: 43px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    background-color: coral;
+    font-weight: bold;
+}

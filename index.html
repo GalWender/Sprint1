@@ -1,0 +1,31 @@
+<html>
+<link rel="stylesheet" href="css/style.css">
+
+<head>
+    <div class="header">MINES SWEEPER</div>
+</head>
+
+<body onload="init()">
+    <button class="restart" onclick="init()"><img src = "assets/img/smiley.gif"/></button>
+    <div class="levels">
+        <button class="level1" onclick="levels(this)">4x4</button>
+        <button class="level2" onclick="levels(this)">8x8</button>
+        <button class="level3" onclick="levels(this)">12x12</button>
+    </div>
+    <div class="timer1">Timer:
+        <div class="timer">00:00:000</div>
+    </div>
+
+    <table class="table" border="5">
+        <tbody class="board">
+
+        </tbody>
+    </table>
+
+
+
+    <script src="js/main.js"></script>
+    <script src="js/util.js"></script>
+</body>
+
+</html>
