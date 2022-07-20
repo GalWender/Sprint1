@@ -2,6 +2,7 @@
 
 
 var MINE = '<img src = "assets/img/bomb.gif"/>'
+var FLAG = '<img src = "assets/img/flag.gif"/>'
 var gBoard
 const RESETLEVEL = '<img src = "assets/img/smiley.gif"/>'
 var gLevel
@@ -140,12 +141,12 @@ function renderBoard(board) {
             const className = 'cell cell-' + i + '-' + j
             if (board[i][j].isShown == false && board[i][j].isMine == true) {
                 var cell = MINE
-                strHTML += `<td onmousedown="onCellClicked(this, ${i}, ${j})"><span style="visibility:hidden;" class="${className}"  data-i="${i}" data-j="${j}" >${cell}</span></td>`
+                strHTML += `<td onmouseup="onCellClicked(this, ${i}, ${j})"><span style="visibility:hidden;" class="${className}"  data-i="${i}" data-j="${j}" >${cell}</span></td>`
             }
             else {
                 var Color = numColor(board[i][j].minesAroundCount)
                 var cell = board[i][j].minesAroundCount
-                strHTML += `<td ${Color} onmousedown="onCellClicked(this, ${i}, ${j})"><span style="visibility:hidden;" class="${className}"  data-i="${i}" data-j="${j}" >${cell}</span></td>`
+                strHTML += `<td ${Color} onmouseup="onCellClicked(this, ${i}, ${j})"><span style="visibility:hidden;" class="${className}"  data-i="${i}" data-j="${j}" >${cell}</span></td>`
             }
         }
         strHTML += '</tr>'
@@ -186,25 +187,24 @@ function numColor(num) {
 //     var cellClass = 'cell-' + location.i + '-' + location.j;
 //     return cellClass;
 // }
-function onCellMarked() {
-    var elTd = document.querySelector('td')
-    elTable.addEventListener('contextmenu', function (ev) {
-        ev.preventDefault();
-        alert('success!');
-        return false;
-    }, false);
+function cellMarked(elCell,i,j) {
+    var elCellContentName = getClassName({ i, j })
+    // console.log(elCellContentName)
+    var elCellContent = document.querySelector('.' + elCellContentName)
+    // console.log(elCellContent)
+    gBoard[i][j].isMarked=true
+    
+
+    //DOM
+    elCellContent.innerText = FLAG
+
 }
 
 
 function onCellClicked(elCell, i, j) {
-    // var elTd = document.querySelector('td')
-    // elTd.addEventListener('contextmenu', function (ev) {
-    //     ev.preventDefault();
-    //     return false;
-    // }, false);
-    var elTd = document.querySelector('td')
-    elTd.addEventListener('contextmenu', (event) => {
-        console.log(event.button)
+    leftClick(elCell,i,j)
+    elCell.addEventListener('contextmenu', (event) => {
+        cellMarked(elCell,i,j)
     })
 
     // window.addEventListener('click', (event) => {
@@ -228,8 +228,6 @@ function onCellClicked(elCell, i, j) {
 
 
 function leftClick(elCell, i, j) {
-
-
     var elCellContentName = getClassName({ i, j })
     // console.log(elCellContentName)
     var elCellContent = document.querySelector('.' + elCellContentName)
@@ -259,7 +257,7 @@ function leftClick(elCell, i, j) {
 
 
 function rightClick(elCell, i, j) {
-
+console.log('hello')
 }
 
 
