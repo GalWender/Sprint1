@@ -23,8 +23,9 @@ function copyMat(mat) {
 }
 
 
+
 function randomArraySort(array) {
-    var shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+    var shuffledArray = array.sort((a, b) => 0.5 - Math.random())
     return shuffledArray
 }
 
@@ -115,12 +116,12 @@ function getEmptyCells(gBoard) {
         for (var j = 0; j < gBoard[i].length; j++) {
 
             if (gBoard[i][j] === EMPTY) {
-                    emptyCells.push({i,j})
+                emptyCells.push({ i, j })
             }
         }
     }
     // console.log(emptyCells)
-    if(emptyCells.length==0) return null
+    if (emptyCells.length == 0) return null
     //IF YOU WANT TO GET A RANDOM POSITION IN AN EMPTY CELL                        
     // var idx = emptyCells[getRandomInt(0,emptyCells.length)]
     // return idx
@@ -149,7 +150,7 @@ function countNeighbors(cellI, cellJ, mat) {
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= mat[i].length) continue;
-            if (mat[i][j]==true) neighborsCount++;
+            if (mat[i][j] == true) neighborsCount++;
         }
     }
     return neighborsCount;
@@ -186,56 +187,56 @@ function getClassName(location) {
 function handleKey(event) {
     var i = gGamerPos.i
     var j = gGamerPos.j
-  
+
     switch (event.key) {
-      case 'ArrowLeft':
-        if (j <= 0) moveTo(i, gBoard[i].length - 1)
-        else moveTo(i, j - 1)
-        break
-      case 'ArrowRight':
-        if (j >= gBoard[i].length - 1) moveTo(i, 0)
-        else moveTo(i, j + 1)
-        break
-      case 'ArrowUp':
-        if (i <= 0) moveTo(gBoard.length - 1, j)
-        else moveTo(i - 1, j)
-        break
-      case 'ArrowDown':
-        if (i >= gBoard.length - 1) moveTo(0, j)
-        else moveTo(i + 1, j)
-        break
+        case 'ArrowLeft':
+            if (j <= 0) moveTo(i, gBoard[i].length - 1)
+            else moveTo(i, j - 1)
+            break
+        case 'ArrowRight':
+            if (j >= gBoard[i].length - 1) moveTo(i, 0)
+            else moveTo(i, j + 1)
+            break
+        case 'ArrowUp':
+            if (i <= 0) moveTo(gBoard.length - 1, j)
+            else moveTo(i - 1, j)
+            break
+        case 'ArrowDown':
+            if (i >= gBoard.length - 1) moveTo(0, j)
+            else moveTo(i + 1, j)
+            break
     }
-  }
+}
 
 // NEEDS AN ARRAY WITH RANDOM NUMS USUALLY
-  function drawNum(nums) {
+function drawNum(nums) {
     // console.log(`gNums.length:`, gNums.length)
     var num = getRandomInt(0, nums.length)
     var removedNum = nums.splice(num, 1)
     // console.log(`gNums:`, gNums)
     return removedNum
-  }
+}
 
 
-  //NEEDS TO BE CHANGED ACOORDINGLY
-  function addGameElement(element, renderEl) {
+//NEEDS TO BE CHANGED ACOORDINGLY
+function addGameElement(element, renderEl) {
     var emptyCells = getEmptyCells()
     if (emptyCells.length === 0) return
-  
+
     var emptyCell = drawNum(emptyCells)
     var i = emptyCell[0].i
     var j = emptyCell[0].j
     gBoard[emptyCell[0].i][emptyCell[0].j].gameElement = element
     renderCell({ i, j }, renderEl)
-  
+
     if (element === BALL) gBallsLeft++
     else if (element === GLUE) {
-      setTimeout(() => {
-        if (gBoard[emptyCell[0].i][emptyCell[0].j].gameElement === GLUE) {
-          gBoard[emptyCell[0].i][emptyCell[0].j].gameElement = null
-          renderCell({ i, j })
-        }
-      }, 3000)
+        setTimeout(() => {
+            if (gBoard[emptyCell[0].i][emptyCell[0].j].gameElement === GLUE) {
+                gBoard[emptyCell[0].i][emptyCell[0].j].gameElement = null
+                renderCell({ i, j })
+            }
+        }, 3000)
     }
-  
-  }
+
+}

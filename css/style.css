@@ -10,8 +10,8 @@ html {
     position: absolute;
     left: 500px;
     top: 250px;
-    height: 530px;
-    width: 530px;
+    height: 500px;
+    width: 500px;
     background-color: rgb(224, 73, 73);
     cursor: pointer;
     text-align: center;
