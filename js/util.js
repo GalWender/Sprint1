@@ -38,7 +38,7 @@ function randomArraySort(array) {
 // var min = 0
 // var count = false
 function startTimer() {
-    if (count) {
+    if (watchIsOn) {
         miliSec = parseInt(miliSec)
         sec = parseInt(sec)
         min = parseInt(min)

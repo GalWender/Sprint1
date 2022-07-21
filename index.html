@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="css/style.css">
 
 <head>
-    <div class="header">MINES SWEEPER</div>
+    <div class="header">MINE SWEEPER</div>
 </head>
 
 <body onload="init()">
@@ -14,6 +14,18 @@
     </div>
     <div class="timer1">Timer:
         <div class="timer">00:00:000</div>
+    </div>
+    <div class="livesContainer">Lives
+        <span class="lives">0</span>
+    </div>
+    <button onclick="hintsClickBtn(this)" class="hintsContainer">Hints<br>
+        <span class="hintsClick">0</span>
+    </button>
+    <button onclick="safeClickBtn(this)" class="safeContainer">Safe Clicks<br>
+        <span class="safeClick">0</span>
+    </button>
+    <div class="highScoreContainer">High Score:
+        <span class="highScore">0</span>
     </div>
 
     <table class="table" border="5">
