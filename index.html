@@ -6,33 +6,35 @@
 
 <body onload="init()">
     <h2 class="header">mine sweeper</h2>
-    <div class="restart" onclick="init()"></div>
-    <div class="levels">
-        <button class="level1" onclick="levels(this)">4x4</button>
-        <button class="level2" onclick="levels(this)">8x8</button>
-        <button class="level3" onclick="levels(this)">12x12</button>
-    </div>
-    <div class="timer1">Timer:
-        <div class="timer">00:00:000</div>
-    </div>
-    <div class="livesContainer">Lives <br>
-        <span class="lives">0</span>
-    </div>
-    <div onclick="hintsClickBtn(this)" class="hintsContainer">Hints<br>
-        <span class="hintsClick">0</span>
-    </div>
-    <div onclick="safeClickBtn(this)" class="safeContainer">Safe Clicks<br>
-        <span class="safeClick">0</span>
-    </div>
-    <div class="highScoreContainer">High Score: <br>
-        <span class="highScore">0</span>
-    </div>
+    <div class="flex-container">
+        <div class="restart" onclick="init()"></div>
+        <div class="levels">
+            <button class="level1" onclick="levels(this)">4x4</button>
+            <button class="level2" onclick="levels(this)">8x8</button>
+            <button class="level3" onclick="levels(this)">12x12</button>
+        </div>
+        <div class="timer1">Timer:
+            <div class="timer">00:00:000</div>
+        </div>
+        <div class="livesContainer">Lives <br>
+            <span class="lives">0</span>
+        </div>
+        <div onclick="hintsClickBtn(this)" class="hintsContainer">Hints<br>
+            <span class="hintsClick">0</span>
+        </div>
+        <div onclick="safeClickBtn(this)" class="safeContainer">Safe Clicks<br>
+            <span class="safeClick">0</span>
+        </div>
+        <div class="highScoreContainer">High Score: <br>
+            <span class="highScore">0</span>
+        </div>
 
-    <table class="table" border="5">
-        <tbody class="board">
+        <table class="table" border="5">
+            <tbody class="board">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
 
 

@@ -29,6 +29,9 @@ var highScore
 var elHints
 var hints
 var hintOn
+var mainColor = '-moz-linear-gradient(#24525e,#356e7c,#4bafc8)'
+var mainColorLight = '-moz-linear-gradient(#306b7a,#4791a4,#57c7e3)'
+//color: #0e3742;
 
 
 
@@ -50,7 +53,7 @@ function init(level) {
     firstClick = true
     hintOn = false
     gGame.isOn = true
-    MINE = '<img src = "assets/img/bomb.gif"/>'
+    MINE = '<img src = "assets/img/bomb.png"/>'
     FLAG = '<img src = "assets/img/flag.gif"/>'
     gGame.markedCount = 0
     gGame.shownCount = 0
@@ -211,18 +214,6 @@ function onCellMarked(elCell, i, j) {
 
 
 function onCellClicked(elCell, i, j) {
-    if (hintOn && gBoard[i][j].isShown==false) {
-        elCell.style.backgroundColor = '#11414f'
-        gBoard[i][j].isShown = true
-        makeVisible(elCell, i, j)
-        displayNeighbors(elCell, i, j)
-        setTimeout(function () {
-            elCell.style.backgroundColor = 'rgb(224, 73, 73)'
-            gBoard.isShown = false
-            renderGameCell({ i, j }, '')
-            hintOn = false
-        }, 1000, elCell, i, j)
-    }
     if (firstClick && gGame.isOn) {
         firstClick = false
         watchIsOn = true
@@ -311,17 +302,6 @@ function displayNeighbors(elCell, cellI, cellJ) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= gBoard[i].length) continue;
             if (gBoard[i][j].minesAroundCount == 0) {
-                if (hintOn&& gBoard[i][j].isShown==false) {
-                    elCell.style.backgroundColor = '#11414f'
-                    gBoard[i][j].isShown = true
-                    makeVisible(elCell, i, j)
-                    setTimeout(function () {
-                        elCell.style.backgroundColor = 'rgb(224, 73, 73)'
-                        gBoard.isShown = false
-                        renderGameCell({ i, j }, '')
-                        hintOn = false
-                    }, 1000, elCell, i, j)
-                }
                 if (gBoard[i][j].isShown) {
                 }
                 else {
@@ -478,35 +458,40 @@ function displayAllMines() {
 
 function safeClickBtn(elsafeClick) {
     // debugger
-    for (var i = 0; i < gLevel.size; i++) {
-        for (var j = 0; j < gLevel.size; j++) {
-            if (gBoard[i][j].isMine) {
+    if (gGame.isOn) {
+        for (var i = 0; i < gLevel.size; i++) {
+            for (var j = 0; j < gLevel.size; j++) {
+                if (gBoard[i][j].isMine) {
 
-            }
-            else if (gBoard[i][j].minesAroundCount >= 0 && gBoard[i][j].isShown == false && gGame.safeClick > 0) {
-                gGame.safeClick--
-                var elSpsafeClick = document.querySelector('.safeClick')
-                elSpsafeClick.innerText = gGame.safeClick
-                var elCellClassName = getClassName({ i, j })
-                var elCell = document.querySelector('.' + elCellClassName)
-                elCell.style.backgroundColor = 'red'
-                gGame.isOn = false
-                setTimeout(function () {
-                    gGame.isOn = true
+                }
+                else if (gBoard[i][j].minesAroundCount >= 0 && gBoard[i][j].isShown == false && gGame.safeClick > 0) {
+                    gGame.safeClick--
+                    var elSpsafeClick = document.querySelector('.safeClick')
+                    elSpsafeClick.innerText = gGame.safeClick
+                    var elCellClassName = getClassName({ i, j })
+                    var elCell = document.querySelector('.' + elCellClassName)
                     elCell.style.backgroundColor = '#11414f'
-                }, 2000, elCell)
-                return
+                    // elSpsafeClick.style.backgroundColor = '#11414f'
+                    gGame.isOn = false
+                    setTimeout(function () {
+                        gGame.isOn = true
+                        elCell.style.backgroundColor = '#0e3742'
+                        // elsafeClick.style.backgroundColor = '#0e3742'
+                    }, 2000, elCell, elsafeClick)
+                    return
 
+                }
             }
         }
     }
 }
 
 function hintsClickBtn(elHintsClickBtn) {
-    elHintsClickBtn.style.backgroundColor = 'red'
-    hintOn = true
-    gGame.hints--
-
+    if (gGame.isOn) {
+        elHintsClickBtn.style.backgroundColor = '#11414f'
+        hintOn = true
+        gGame.hints--
+    }
 
 }
 

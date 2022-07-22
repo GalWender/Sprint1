@@ -4,7 +4,7 @@
     padding: 0;
     font-family: arial;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     margin: auto;
     position: relative;
 
@@ -22,18 +22,19 @@ body {
 .table {
     position: relative;
     margin: auto;
-    margin-top: 350px;
-    height: 550px;
-    width: 550px;
+    /* margin-top: 350px; */
+    height: 780px;
+    width: 780px;
     background-color: #0e3742;
     cursor: pointer;
     text-align: center;
     border: 300px;
-    justify-content: center;
-    bottom: 700px;
+    bottom: 100px;
+    
+    /* justify-content: center; */
     /* margin-bottom: 20%; */
 
-
+    
 }
 
 /* tbody{
@@ -44,31 +45,38 @@ body {
     animation-fill-mode: forwards;
 } */
 td {
+    /* background-image: linear-gradient(#24525e,#356e7c,#4bafc8); */
     border-radius: 10px;
     height: 40px;
     width: 40px;
-    font-size: 30px;
+    font-size: 40px;
     /* letter-spacing: 15px; */
     color: #0e3742;
     align-items: center;
     text-transform: uppercase;
     text-align: center;
-    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0008); */
     line-height: 0.70em;
     outline: none;
     animation: animate1 linear infinite;
     animation-fill-mode: forwards;
 
 }
+.flex-container{
+    border: 20px solid #0e3742;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 100px;
+    border-radius: 20px;
+}
 
 
 
 h2 {
     justify-content: center;
-    display: flex;
     align-items: center;
     /* margin: auto; */
-    position: relative;
     font-size: 6em;
     letter-spacing: 15px;
     color: #0e3742;
@@ -79,6 +87,7 @@ h2 {
     line-height: 0.70em;
     outline: none;
     animation: animate 5s linear infinite;
+    top: 30px;
 }
 
 @keyframes animate {
@@ -158,6 +167,7 @@ h2 {
     animation-fill-mode: forwards;
     /* margin-top: px; */
     right: 300px;
+    bottom: 85px;
 
 }
 
@@ -169,6 +179,8 @@ h2 {
     cursor: pointer;
     border: 2px solid #0f596d;
     font-size: 30px;
+    top: 300px;
+    text-align: center;
 }
 
 .levels {
@@ -180,6 +192,8 @@ h2 {
     padding: 10px;
     border: 2px solid #24525e;
     padding-bottom: 50px;
+    left: 300px;
+    bottom: 20px;
 
 }
 
@@ -210,6 +224,8 @@ h2 {
     padding: 10px;
     border: 2px solid #215969;
     padding-bottom: 50px;
+    right: 140px;
+    bottom: 150px;
 
 
     color: #0e3742;
@@ -231,8 +247,6 @@ h2 {
     padding: 10px;
     border: 2px solid #1d5362;
     padding-bottom: 50px;
-
-
     font-size: 20px;
     font-weight: bold;
     color: #0e3742;
@@ -243,10 +257,11 @@ h2 {
     animation: animate1 linear infinite;
     animation-fill-mode: forwards;
     cursor: pointer;
+    left: 320;
+    bottom: 180px;
 }
 
 .highScoreContainer {
-    position: relative;
     height: 100px;
     width: 140px;
     text-align: center;
@@ -265,6 +280,7 @@ h2 {
     outline: none;
     animation: animate1 linear infinite;
     animation-fill-mode: forwards;
+    bottom: 380px;
 }
 
 .highScore {
@@ -273,7 +289,7 @@ h2 {
 }
 
 .hintsContainer {
-    position: relative;
+    
     height: 80px;
     width: 130px;
     text-align: center;
@@ -293,4 +309,6 @@ h2 {
     animation: animate1 linear infinite;
     animation-fill-mode: forwards;
     cursor: pointer;
+    left: 170px;
+    bottom: 100px;
 }
