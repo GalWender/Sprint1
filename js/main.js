@@ -1,7 +1,7 @@
 'use strict'
-const NORMAL = '😁'
-const LOSE = '🤯'
-const WIN = '😎'
+const NORMAL = '<img src="assets/img/normal.gif"/>';
+const LOSE = '<img src="assets/img/lose.gif"/>'
+const WIN = '<img src="assets/img/win.gif"/>'
 var MINE
 var FLAG
 var gBoard
@@ -44,7 +44,7 @@ function init(level) {
     stopWatch = document.querySelector('.timer')
     elsafeClick = document.querySelector('.safeClick')
     restart = document.querySelector('.restart')
-    restart.innerText = NORMAL
+    restart.innerHTML = NORMAL
     startIsMine = true
     watchIsOn = false
     firstClick = true
@@ -123,7 +123,7 @@ function countNeighborMines(cellI, cellJ, mat) {
     }
     return neighborsCount;
 }
-
+///////////////////////////////////////////// make the hints work on all cells
 //CHECKS EVERY PLACE ON THE MATMINES AND PLACES AN OBJECT ACOORDINGLY
 function createBoard(starterGBoard) {
     for (var i = 0; i < starterGBoard.length; i++) {
@@ -212,7 +212,7 @@ function onCellMarked(elCell, i, j) {
 
 function onCellClicked(elCell, i, j) {
     if (hintOn && gBoard[i][j].isShown==false) {
-        elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+        elCell.style.backgroundColor = '#11414f'
         gBoard[i][j].isShown = true
         makeVisible(elCell, i, j)
         displayNeighbors(elCell, i, j)
@@ -234,7 +234,7 @@ function onCellClicked(elCell, i, j) {
 
             }
             else {
-                elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+                elCell.style.backgroundColor = '#11414f'
                 gBoard[i][j].isShown = true
                 gGame.shownCount++
                 makeVisible(elCell, i, j)
@@ -252,7 +252,7 @@ function onCellClicked(elCell, i, j) {
                     gGame.lives--
                     elLives = document.querySelector('.lives')
                     elLives.innerText = gGame.lives.toString()
-                    elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+                    elCell.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     makeVisible(elCell, i, j)
                     checkVictory(i, j)
@@ -263,7 +263,7 @@ function onCellClicked(elCell, i, j) {
                 startIsMine = false
                 gBoard[i][j].isMine = false
                 gBoard[i][j].minesAroundCount = 0
-                elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+                elCell.style.backgroundColor = '#11414f'
                 gBoard[i][j].isShown = true
                 gGame.shownCount++
                 makeVisible(elCell, i, j)
@@ -280,7 +280,7 @@ function onCellClicked(elCell, i, j) {
 
             }
             else {
-                elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+                elCell.style.backgroundColor = '#11414f'
                 gBoard[i][j].isShown = true
                 gGame.shownCount++
                 makeVisible(elCell, i, j)
@@ -312,7 +312,7 @@ function displayNeighbors(elCell, cellI, cellJ) {
             if (j < 0 || j >= gBoard[i].length) continue;
             if (gBoard[i][j].minesAroundCount == 0) {
                 if (hintOn&& gBoard[i][j].isShown==false) {
-                    elCell.style.backgroundColor = 'rgb(172, 60, 60)'
+                    elCell.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     makeVisible(elCell, i, j)
                     setTimeout(function () {
@@ -327,7 +327,7 @@ function displayNeighbors(elCell, cellI, cellJ) {
                 else {
                     var elCellClassName = getClassName({ i, j })
                     var elCellNeighbor = document.querySelector('.' + elCellClassName)
-                    elCellNeighbor.style.backgroundColor = 'rgb(172, 60, 60)'
+                    elCellNeighbor.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     gGame.shownCount++
                     checkVictory(i, j)
@@ -347,7 +347,7 @@ function displayNeighbors(elCell, cellI, cellJ) {
                 else {
                     var elCellClassName = getClassName({ i, j })
                     var elCellNeighbor = document.querySelector('.' + elCellClassName)
-                    elCellNeighbor.style.backgroundColor = 'rgb(172, 60, 60)'
+                    elCellNeighbor.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     gGame.shownCount++
                     console.log(gBoard[i][j].minesAroundCount)
@@ -436,7 +436,7 @@ function checkVictory(i, j) {
     console.log(gLevel.mineCount, gGame.markedCount)
     console.log(((gLevel.size * gLevel.size) - gLevel.mineCount), gGame.shownCount)
     if ((gGame.shownCount == ((gLevel.size * gLevel.size) - gLevel.mineCount)) && gGame.lives > 0) {
-        restart.innerText = WIN
+        restart.innerHTML = WIN
         watchIsOn = false
         clearInterval(startWatch)
         gGame.secsPassed = sec
@@ -451,7 +451,7 @@ function checkVictory(i, j) {
         displayAllMines()
     }
     if ((gBoard[i][j].isMine && gBoard[i][j].isShown) && gGame.lives == 0) {
-        restart.innerText = LOSE
+        restart.innerHTML = LOSE
         watchIsOn = false
         clearInterval(startWatch)
         firstClick = true
@@ -493,7 +493,7 @@ function safeClickBtn(elsafeClick) {
                 gGame.isOn = false
                 setTimeout(function () {
                     gGame.isOn = true
-                    elCell.style.backgroundColor = 'rgb(224, 73, 73)'
+                    elCell.style.backgroundColor = '#11414f'
                 }, 2000, elCell)
                 return
 
