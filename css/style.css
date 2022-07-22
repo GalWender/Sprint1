@@ -48,7 +48,6 @@ td {
     font-size: 40px;
     /* letter-spacing: 15px; */
     color: #0e3742;
-    text-transform: uppercase;
     text-align: center;
     
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0008); */
@@ -58,19 +57,20 @@ td {
     animation-fill-mode: forwards;
 
 }
-.flex-container{
+/* .flex-container{
     border: 20px solid #0e3742;
     margin-left: 300px;
     margin-right: 300px;
     margin-top: 100px;
     border-radius: 20px;
-}
+} */
 
 
 
 h2 {
-    justify-content: center;
-    align-items: center;
+
+    /* justify-content: center; */
+    /* align-items: center; */
     /* margin: auto; */
     font-size: 6em;
     letter-spacing: 15px;
@@ -167,7 +167,7 @@ h2 {
     animation-fill-mode: forwards;
     /* margin-top: px; */
     right: 300px;
-    bottom: 85px;
+    bottom: 50px;
 
 }
 
@@ -193,7 +193,7 @@ h2 {
     border: 2px solid #24525e;
     padding-bottom: 50px;
     left: 300px;
-    bottom: 20px;
+    top: 20px;
 
 }
 
@@ -225,7 +225,7 @@ h2 {
     border: 2px solid #215969;
     padding-bottom: 50px;
     right: 140px;
-    bottom: 150px;
+    bottom: 110px;
 
 
     color: #0e3742;
@@ -258,7 +258,7 @@ h2 {
     animation-fill-mode: forwards;
     cursor: pointer;
     left: 320;
-    bottom: 180px;
+    bottom: 140px;
 }
 
 .highScoreContainer {
@@ -280,7 +280,7 @@ h2 {
     outline: none;
     animation: animate1 linear infinite;
     animation-fill-mode: forwards;
-    bottom: 380px;
+    bottom: 330px;
 }
 
 .highScore {
@@ -310,5 +310,5 @@ h2 {
     animation-fill-mode: forwards;
     cursor: pointer;
     left: 170px;
-    bottom: 100px;
+    bottom: 60px;
 }

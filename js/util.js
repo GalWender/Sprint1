@@ -155,6 +155,24 @@ function countNeighbors(cellI, cellJ, mat) {
     }
     return neighborsCount;
 }
+function renderGameCell(location, value) {
+    // Select the elCell and set the value
+
+    console.log(location,' ',value)
+    var elCellName = getClassName(location)
+    console.log(elCellName)
+    var elCell1 = document.querySelector('.'+elCellName)
+    console.log(elCell1)
+    if (typeof value == 'string') {
+        elCell1.innerText = value
+    }
+    if ( typeof value == 'number') {
+        elCell1.innerText = value.toString()
+    }
+    else {
+        elCell1.innerHTML = value
+    }
+}
 
 function blowUpNegs(cellI, cellJ) {
 
