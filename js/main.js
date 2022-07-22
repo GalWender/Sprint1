@@ -16,7 +16,6 @@ var miliSec
 var sec
 var min
 var watchIsOn
-var randomArrayMines = []
 var firstClick
 var startIsMine
 var lives
@@ -35,7 +34,8 @@ var mainColorLight = '-moz-linear-gradient(#306b7a,#4791a4,#57c7e3)'
 
 
 
-function init(level) {
+function init(level, randomArrayMines) {
+    // randomArrayMines=[]
     elHints = document.querySelector('.hintsClick')
 
     miliSec = 0
@@ -70,7 +70,7 @@ function init(level) {
     // console.log(level)
     gLevel = chooseLevel(level)
     // console.log(gLevel)
-    starterGBoard = MatMines(gLevel)
+    starterGBoard = MatMines(gLevel, randomArrayMines)
     console.log(starterGBoard)
     gBoard = createBoard(starterGBoard)
     renderBoard(gBoard, '.board')
@@ -99,7 +99,7 @@ function chooseLevel(level) {
 
 
 //CREATES A MATRIX WITH BOMBS IN A RANDOM PLACMENT ACOORDING TO HOW MUCH BOBS ARE ALLOWED TO BE ON THE BOARD
-function MatMines(gLevel) {
+function MatMines(gLevel, randomArrayMines) {
     var z = 0
     var board = [];
     for (var i = 0; i < gLevel.size; i++) {
@@ -215,6 +215,18 @@ function onCellMarked(elCell, i, j) {
 
 function onCellClicked(elCell, i, j) {
     if (firstClick && gGame.isOn) {
+        if (gBoard[i][j].isMine) {
+            gLevel.mineCount--
+
+            gBoard[i][j].isMine = false
+            gBoard[i][j].minesAroundCount = 0
+            elCell.style.backgroundColor = '#11414f'
+            gBoard[i][j].isShown = true
+            gGame.shownCount++
+            makeVisible(elCell, i, j)
+            displayNeighbors(elCell, i, j)
+            checkVictory(i, j)
+        }
         firstClick = false
         watchIsOn = true
         startWatch = setInterval(startTimer, 47)
@@ -235,32 +247,21 @@ function onCellClicked(elCell, i, j) {
 
         }
         if (gBoard[i][j].isMine) {
-            if (startIsMine == false) {
-                if (gBoard[i][j].isShown) {
 
-                }
-                else {
-                    gGame.lives--
-                    elLives = document.querySelector('.lives')
-                    elLives.innerText = gGame.lives.toString()
-                    elCell.style.backgroundColor = '#11414f'
-                    gBoard[i][j].isShown = true
-                    makeVisible(elCell, i, j)
-                    checkVictory(i, j)
-                }
+            if (gBoard[i][j].isShown) {
+
             }
             else {
-                gLevel.mineCount--
-                startIsMine = false
-                gBoard[i][j].isMine = false
-                gBoard[i][j].minesAroundCount = 0
+                gGame.lives--
+                elLives = document.querySelector('.lives')
+                elLives.innerText = gGame.lives.toString()
                 elCell.style.backgroundColor = '#11414f'
                 gBoard[i][j].isShown = true
-                gGame.shownCount++
                 makeVisible(elCell, i, j)
-                displayNeighbors(elCell, i, j)
                 checkVictory(i, j)
             }
+
+
 
         }
         if (gBoard[i][j].isMarked) {
@@ -378,6 +379,7 @@ function makeVisible(elCell, i, j) {
 
 function levels(btnLevel) {
     if (btnLevel.innerText == '4x4') {
+        var randomArrayMines = []
         var minesLeft = 2
         for (var i = 0; i < 16; i++) {
             if (minesLeft > 0) { randomArrayMines.push('*') }
@@ -385,9 +387,12 @@ function levels(btnLevel) {
             minesLeft--
         }
         randomArrayMines = randomArraySort(randomArrayMines)
-        init(4)
+        console.log(randomArrayMines)
+
+        init(4, randomArrayMines)
     }
     if (btnLevel.innerText == '8x8') {
+        var randomArrayMines = []
         var minesLeft = 12
         for (var i = 0; i < 84; i++) {
             if (minesLeft > 0) { randomArrayMines.push('*') }
@@ -395,9 +400,10 @@ function levels(btnLevel) {
             minesLeft--
         }
         randomArrayMines = randomArraySort(randomArrayMines)
-        init(8)
+        init(8, randomArrayMines)
     }
     if (btnLevel.innerText == '12x12') {
+        var randomArrayMines = []
         var minesLeft = 30
         for (var i = 0; i < 144; i++) {
             if (minesLeft > 0) { randomArrayMines.push('*') }
@@ -405,7 +411,7 @@ function levels(btnLevel) {
             minesLeft--
         }
         randomArrayMines = randomArraySort(randomArrayMines)
-        init(12)
+        init(12, randomArrayMines)
     }
 }
 
