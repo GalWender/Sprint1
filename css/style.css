@@ -66,9 +66,8 @@ td {
 } */
 
 
-
 h2 {
-
+    
     /* justify-content: center; */
     /* align-items: center; */
     /* margin: auto; */
@@ -91,7 +90,7 @@ h2 {
 }
 
 @keyframes animate {
-
+    
     0%,
     18%,
     20%,
@@ -104,7 +103,7 @@ h2 {
         color: #0e3742;
         box-shadow: none;
     }
-
+    
     18.1%,
     20.1%,
     30%,
@@ -117,14 +116,14 @@ h2 {
     100% {
         color: #fff;
         text-shadow: 0 0 10px #03bcf4,
-            0 0 20px #03bcf4,
-            0 0 40px #03bcf4,
-            0 0 80px #03bcf4,
-            0 0 160px #03bcf4;
-
-
+        0 0 20px #03bcf4,
+        0 0 40px #03bcf4,
+        0 0 80px #03bcf4,
+        0 0 160px #03bcf4;
+        
+        
     }
-
+    
 }
 
 @keyframes animate1 {
@@ -132,18 +131,18 @@ h2 {
         color: #0e3742;
         box-shadow: none;
     }
-
+    
     100% {
         color: #fff;
         text-shadow: 0 0 10px #03bcf4,
-            0 0 20px #03bcf4,
-            0 0 40px #03bcf4,
-            0 0 80px #03bcf4,
-            0 0 160px #03bcf4;
-
-
+        0 0 20px #03bcf4,
+        0 0 40px #03bcf4,
+        0 0 80px #03bcf4,
+        0 0 160px #03bcf4;
+        
+        
     }
-
+    
 }
 
 .timer1 {
@@ -168,7 +167,7 @@ h2 {
     /* margin-top: px; */
     right: 300px;
     bottom: 50px;
-
+    
 }
 
 .restart {
@@ -194,7 +193,7 @@ h2 {
     padding-bottom: 50px;
     left: 300px;
     top: 20px;
-
+    
 }
 
 .levels button {
@@ -226,8 +225,8 @@ h2 {
     padding-bottom: 50px;
     right: 140px;
     bottom: 110px;
-
-
+    
+    
     color: #0e3742;
     align-items: center;
     text-transform: uppercase;
@@ -237,6 +236,30 @@ h2 {
     animation-fill-mode: forwards;
 }
 
+.makeBombs{
+    position: relative;
+    height: 80px;
+    width: 130px;
+    text-align: center;
+    border-radius: 35px;
+    background-color: #0e3742;
+    padding: 10px;
+    border: 2px solid #1d5362;
+    padding-bottom: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0e3742;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    outline: none;
+    animation: animate1 linear infinite;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    right: 300px;
+    bottom: 320px;
+
+}
 .safeContainer {
     position: relative;
     height: 80px;
