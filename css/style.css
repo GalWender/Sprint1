@@ -310,6 +310,30 @@ h2 {
     /* position: relative; */
 
 }
+.undo{
+      
+    height: 80px;
+    width: 130px;
+    text-align: center;
+    border-radius: 35px;
+    background-color: #0e3742;
+    padding: 10px;
+    border: 2px solid #265663;
+    padding-bottom: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: #0e3742;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    outline: none;
+    animation: animate1 linear infinite;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    left: 170px;
+    bottom: 250px;
+}
 
 .hintsContainer {
     

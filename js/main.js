@@ -543,9 +543,11 @@ function levels(btnLevel) {
             randomArrayMines = randomArraySort(randomArrayMines)
             init(12, randomArrayMines)
         }
+        else{
         var randomArrayMines = []
         for (var i = 0; i < 144; i++) { randomArrayMines.push(EMPTY) }
         init(12, randomArrayMines)
+        }
     }
 }
 
@@ -666,6 +668,10 @@ function makeBombs(elMakeBombsBtn) {
         var matWithBombs = matBombPlacment()
         init(gLevel.size,matWithBombs)
     }
+
+}
+
+function undo(elUndoBtn){
 
 }
 
