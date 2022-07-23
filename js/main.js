@@ -31,12 +31,16 @@ var hintOn
 var hint8thCount
 var makeBombsOn = false
 var starterMatForBombMode
+var undoArray
+var undoShownCount
+var sevenBoomIsOn =false
 //color: #0e3742
 
 
 
 function init(level, randomArrayMines) {
-
+    undoShownCount = 0
+    undoArray = []
     EMPTY = ''
     hint8thCount = 0
     // randomArrayMines=[]
@@ -53,7 +57,10 @@ function init(level, randomArrayMines) {
     restart.innerHTML = NORMAL
     startIsMine = true
     watchIsOn = false
-    firstClick = true
+    if(sevenBoomIsOn==true){
+        firstClick=false
+    }
+    else{firstClick = true}
     hintOn = false
     gGame.isOn = true
     MINE = '<img src = "assets/img/bomb.png"/>'
@@ -180,6 +187,8 @@ function renderBoard(board) {
 
 
 function onCellMarked(elCell, i, j) {
+    undoArray.push(structuredClone(gBoard))
+    // console.log('undo', undoArray)
     if (gGame.isOn) {
         var elTable = document.querySelector('table')
         elTable.addEventListener('contextmenu', (event) => {
@@ -192,6 +201,7 @@ function onCellMarked(elCell, i, j) {
             gGame.markedCount--
             renderGameCell({ i: i, j: j }, EMPTY)
             checkVictory(i, j)
+            // undoArray.push(gBoard)
             return
         }
         if (!gBoard[i][j].isMarked && !gBoard[i][j].isShown) {
@@ -201,19 +211,21 @@ function onCellMarked(elCell, i, j) {
             gGame.markedCount++
             renderGameCell({ i: i, j: j }, FLAG)
             checkVictory(i, j)
+            // undoArray.push(gBoard)
             return
         }
     }
+
 }
 
 function matBombPlacment() {
     starterMatForBombMode = []
     for (var i = 0; i < gLevel.size; i++) {
         for (var j = 0; j < gLevel.size; j++) {
-            if(gBoard[i][j].isMine){
+            if (gBoard[i][j].isMine) {
                 starterMatForBombMode.push('*')
             }
-            else{
+            else {
                 starterMatForBombMode.push(EMPTY)
             }
         }
@@ -224,6 +236,8 @@ function matBombPlacment() {
 
 
 function onCellClicked(elCell, i, j) {
+    undoArray.push(structuredClone(gBoard))
+    console.log('undo', undoArray)
     if (makeBombsOn == true) {
         console.log('making bombs')
         gBoard[i][j].isMine = true
@@ -234,7 +248,8 @@ function onCellClicked(elCell, i, j) {
         }, 1500, elCell, i, j)
     }
     else if (makeBombsOn == false) {
-        if (firstClick && gGame.isOn) {
+        if (firstClick && gGame.isOn&&sevenBoomIsOn==false) {
+            console.log('ok')
             if (gBoard[i][j].isMine) {
                 gLevel.mineCount--
                 gBoard[i][j].isMine = false
@@ -242,6 +257,7 @@ function onCellClicked(elCell, i, j) {
                 elCell.style.backgroundColor = '#11414f'
                 gBoard[i][j].isShown = true
                 gGame.shownCount++
+                undoShownCount++
                 makeVisible(elCell, i, j)
                 displayNeighbors(elCell, i, j)
                 checkVictory(i, j)
@@ -249,6 +265,7 @@ function onCellClicked(elCell, i, j) {
             firstClick = false
             watchIsOn = true
             startWatch = setInterval(startTimer, 47)
+
         }
         if (gGame.isOn) {
             if (hintOn) {
@@ -292,6 +309,7 @@ function onCellClicked(elCell, i, j) {
                 var elHintsBtn = document.querySelector('.hintsClick')
                 elHintsBtn.innerText = gGame.hints
                 elHintsBtn.style.backgroundColor = '#0e3742'
+                // undoArray.push(gBoard)
                 return
 
             }
@@ -303,6 +321,7 @@ function onCellClicked(elCell, i, j) {
                     elCell.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     gGame.shownCount++
+                    undoShownCount++
                     makeVisible(elCell, i, j)
                     displayNeighbors(elCell, i, j)
                     checkVictory(i, j)
@@ -338,6 +357,7 @@ function onCellClicked(elCell, i, j) {
                     elCell.style.backgroundColor = '#11414f'
                     gBoard[i][j].isShown = true
                     gGame.shownCount++
+                    undoShownCount++
                     makeVisible(elCell, i, j)
                     checkVictory(i, j)
                 }
@@ -346,6 +366,7 @@ function onCellClicked(elCell, i, j) {
 
         }
     }
+    // undoArray.push(gBoard)
 }
 
 
@@ -378,6 +399,7 @@ function displayNeighbors(elCell, cellI, cellJ) {
                         elCellNeighbor.style.backgroundColor = '#11414f'
                         gBoard[i][j].isShown = true
                         gGame.shownCount++
+                        undoShownCount++
                         checkVictory(i, j)
                         displayNeighbors(elCell, i, j)
                     }
@@ -398,6 +420,7 @@ function displayNeighbors(elCell, cellI, cellJ) {
                         elCellNeighbor.style.backgroundColor = '#11414f'
                         gBoard[i][j].isShown = true
                         gGame.shownCount++
+                        undoShownCount++
                         console.log(gBoard[i][j].minesAroundCount)
                         makeVisible(elCellNeighbor, i, j)
                         /////////////////////////
@@ -494,59 +517,93 @@ function makeHidden(elCell, i, j) {
 
 function levels(btnLevel) {
     if (btnLevel.innerText == '4x4') {
-        if (makeBombsOn == false) {
-            var randomArrayMines = []
-            var minesLeft = 2
-            for (var i = 0; i < 16; i++) {
-                if (minesLeft > 0) { randomArrayMines.push('*') }
-                else { randomArrayMines.push(EMPTY) }
-                minesLeft--
-            }
-            randomArrayMines = randomArraySort(randomArrayMines)
+        if (sevenBoomIsOn == false) {
+            if (makeBombsOn == false) {
+                var randomArrayMines = []
+                var minesLeft = 2
+                for (var i = 0; i < 16; i++) {
+                    if (minesLeft > 0) { randomArrayMines.push('*') }
+                    else { randomArrayMines.push(EMPTY) }
+                    minesLeft--
+                }
+                randomArrayMines = randomArraySort(randomArrayMines)
 
-            init(4, randomArrayMines)
+                init(4, randomArrayMines)
+            }
+            else {
+                var randomArrayMines = []
+                for (var i = 0; i < 16; i++) { randomArrayMines.push(EMPTY) }
+                init(4, randomArrayMines)
+            }
         }
         else {
             var randomArrayMines = []
-            for (var i = 0; i < 16; i++) { randomArrayMines.push(EMPTY) }
+            for (var i = 0; i < 16; i++) {
+                if (i % 10 == 7 || i % 7 == 0) { randomArrayMines.push('*') }
+                else { randomArrayMines.push(EMPTY) }
+            }
             init(4, randomArrayMines)
         }
     }
     if (btnLevel.innerText == '8x8') {
-        if (makeBombsOn == false) {
-            var randomArrayMines = []
-            var minesLeft = 12
-            for (var i = 0; i < 64; i++) {
-                if (minesLeft > 0) { randomArrayMines.push('*') }
-                else { randomArrayMines.push(EMPTY) }
-                minesLeft--
+        if (sevenBoomIsOn == false) {
+            if (makeBombsOn == false) {
+                var randomArrayMines = []
+                var minesLeft = 12
+                for (var i = 0; i < 64; i++) {
+                    if (minesLeft > 0) { randomArrayMines.push('*') }
+                    else { randomArrayMines.push(EMPTY) }
+                    minesLeft--
+                }
+                randomArrayMines = randomArraySort(randomArrayMines)
+                init(8, randomArrayMines)
             }
-            randomArrayMines = randomArraySort(randomArrayMines)
-            init(8, randomArrayMines)
+            else {
+                var randomArrayMines = []
+                for (var i = 0; i < 64; i++) { randomArrayMines.push(EMPTY) }
+                init(8, randomArrayMines)
+            }
         }
         else {
             var randomArrayMines = []
-            for (var i = 0; i < 64; i++) { randomArrayMines.push(EMPTY) }
+            for (var i = 0; i < 64; i++) {
+                
+                if (i % 10 == 7 || i % 7 == 0) { randomArrayMines.push('*') }
+                else { randomArrayMines.push(EMPTY) }
+            }
             init(8, randomArrayMines)
+
         }
 
     }
     if (btnLevel.innerText == '12x12') {
-        if (makeBombsOn == false) {
-            var randomArrayMines = []
-            var minesLeft = 30
-            for (var i = 0; i < 144; i++) {
-                if (minesLeft > 0) { randomArrayMines.push('*') }
-                else { randomArrayMines.push(EMPTY) }
-                minesLeft--
+        if (sevenBoomIsOn == false) {
+            if (makeBombsOn == false) {
+                var randomArrayMines = []
+                var minesLeft = 30
+                for (var i = 0; i < 144; i++) {
+                    if (minesLeft > 0) { randomArrayMines.push('*') }
+                    else { randomArrayMines.push(EMPTY) }
+                    minesLeft--
+                }
+                randomArrayMines = randomArraySort(randomArrayMines)
+                init(12, randomArrayMines)
             }
-            randomArrayMines = randomArraySort(randomArrayMines)
-            init(12, randomArrayMines)
+            else {
+                var randomArrayMines = []
+                for (var i = 0; i < 144; i++) { randomArrayMines.push(EMPTY) }
+                init(12, randomArrayMines)
+            }
         }
         else{
-        var randomArrayMines = []
-        for (var i = 0; i < 144; i++) { randomArrayMines.push(EMPTY) }
-        init(12, randomArrayMines)
+            var randomArrayMines = []
+            for (var i = 0; i < 144; i++) {
+
+                if (i % 10 == 7 || i % 7 == 0) { randomArrayMines.push('*') }
+
+                else { randomArrayMines.push(EMPTY) }
+            }
+            init(12, randomArrayMines)
         }
     }
 }
@@ -666,14 +723,81 @@ function makeBombs(elMakeBombsBtn) {
         elMakeBombsBtn.style.backgroundColor = '#0e3742'
         makeBombsOn = false
         var matWithBombs = matBombPlacment()
-        init(gLevel.size,matWithBombs)
+        init(gLevel.size, matWithBombs)
     }
 
 }
 
-function undo(elUndoBtn){
+function undo(elUndoBtn) {
+    // console.log('undoarray:', undoArray)
+    // gBoard = []
+    gBoard = undoArray.pop()
+    console.log(gBoard)
+    renderUndo(gBoard)
 
 }
+
+function renderUndo(board) {
+    var strHTML = ''
+    for (var i = 0; i < board.length; i++) {
+        strHTML += '<tr>'
+        for (var j = 0; j < board.length; j++) {
+            var elCellName = getClassName({ i: i, j: j })
+            var elCell = document.querySelector('.' + elCellName)
+            // debugger
+            if (board[i][j].minesAroundCount == 0 && board[i][j].isShown) {
+                console.log('rendered 0')
+                var cell = EMPTY
+            }
+            if (board[i][j].isMine && board[i][j].isShown) {
+                console.log('rendered mine')
+                var cell = MINE
+            }
+            if (board[i][j].isMarked) {
+                console.log('rendered flag')
+                var cell = FLAG
+            }
+            if (board[i][j].minesAroundCount > 0 && board[i][j].isShown) {
+                console.log('rendered number')
+                var cell = board[i][j].minesAroundCount
+            }
+            if (gBoard[i][j].isShown == false) {
+                console.log('rendered nothing becasue its not shown')
+                var cell = EMPTY
+            }
+            const className = 'cell cell-' + i + '-' + j
+            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" oncontextmenu="onCellMarked(this, ${i}, ${j})" class="${className}">${cell}</td>`
+        }
+        strHTML += '</tr>'
+    }
+
+    var elBoard = document.querySelector('.board')
+    elBoard.innerHTML = strHTML
+
+
+}
+
+
+function sevenBoom(elSevenBoom) {
+    console.log('hey')
+    if (sevenBoomIsOn == false) {
+        console.log('on')
+        init()
+        elSevenBoom.style.backgroundColor = '#11414f'
+        sevenBoomIsOn = true
+        // firstClick = false
+    }
+    else if (sevenBoomIsOn == true) {
+        console.log('off')
+        elSevenBoom.style.backgroundColor = '#0e3742'
+        elSevenBoom = false
+        // var matWithBombs = matBombPlacment()
+        // firstClick =true
+        init()
+    }
+}
+
+
 
 
 

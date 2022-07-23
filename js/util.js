@@ -16,11 +16,16 @@ function copyMat(mat) {
     for (var i = 0; i < mat.length; i++) {
         newMat[i] = [];
         for (var j = 0; j < mat[0].length; j++) {
-            newMat[i][j] = mat[i][j];
+            newMat[i][j] = mat.slice()[i][j]
         }
     }
     return newMat;
 }
+// function copyMat(mat) {
+//     var newMat = mat.slice()
+//     return newMat;
+// }
+
 
 
 
@@ -78,7 +83,9 @@ function zeroPad(num, size) {
     return srtPad.substring(srtPad.length - size)
 }
 
-
+// var board1 = []
+// var cloneOfBoard1 = []
+// cloneOfBoard1.push(structuredClone(board1))
 function printMat(mat, selector) {
 
     var strHTML = '<table border="0"><tbody>'

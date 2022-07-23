@@ -19,18 +19,18 @@ body {
 .table {
     position: relative;
     /* margin-top: 350px; */
-    height: 780px;
-    width: 780px;
+    height: 900px;
+    width: 900px;
     background-color: #0e3742;
     cursor: pointer;
     text-align: center;
     border: 300px;
-    bottom: 100px;
-    
+    bottom: 190px;
+
     /* justify-content: center; */
     /* margin-bottom: 20%; */
 
-    
+
 }
 
 /* tbody{
@@ -49,7 +49,7 @@ td {
     /* letter-spacing: 15px; */
     color: #0e3742;
     text-align: center;
-    
+
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0008); */
     line-height: 0.70em;
     outline: none;
@@ -57,6 +57,7 @@ td {
     animation-fill-mode: forwards;
 
 }
+
 /* .flex-container{
     border: 20px solid #0e3742;
     margin-left: 300px;
@@ -67,7 +68,7 @@ td {
 
 
 h2 {
-    
+
     /* justify-content: center; */
     /* align-items: center; */
     /* margin: auto; */
@@ -90,7 +91,7 @@ h2 {
 }
 
 @keyframes animate {
-    
+
     0%,
     18%,
     20%,
@@ -103,7 +104,7 @@ h2 {
         color: #0e3742;
         box-shadow: none;
     }
-    
+
     18.1%,
     20.1%,
     30%,
@@ -116,14 +117,14 @@ h2 {
     100% {
         color: #fff;
         text-shadow: 0 0 10px #03bcf4,
-        0 0 20px #03bcf4,
-        0 0 40px #03bcf4,
-        0 0 80px #03bcf4,
-        0 0 160px #03bcf4;
-        
-        
+            0 0 20px #03bcf4,
+            0 0 40px #03bcf4,
+            0 0 80px #03bcf4,
+            0 0 160px #03bcf4;
+
+
     }
-    
+
 }
 
 @keyframes animate1 {
@@ -131,18 +132,18 @@ h2 {
         color: #0e3742;
         box-shadow: none;
     }
-    
+
     100% {
         color: #fff;
         text-shadow: 0 0 10px #03bcf4,
-        0 0 20px #03bcf4,
-        0 0 40px #03bcf4,
-        0 0 80px #03bcf4,
-        0 0 160px #03bcf4;
-        
-        
+            0 0 20px #03bcf4,
+            0 0 40px #03bcf4,
+            0 0 80px #03bcf4,
+            0 0 160px #03bcf4;
+
+
     }
-    
+
 }
 
 .timer1 {
@@ -167,7 +168,7 @@ h2 {
     /* margin-top: px; */
     right: 300px;
     bottom: 50px;
-    
+
 }
 
 .restart {
@@ -193,7 +194,7 @@ h2 {
     padding-bottom: 50px;
     left: 300px;
     top: 20px;
-    
+
 }
 
 .levels button {
@@ -225,8 +226,8 @@ h2 {
     padding-bottom: 50px;
     right: 140px;
     bottom: 110px;
-    
-    
+
+
     color: #0e3742;
     align-items: center;
     text-transform: uppercase;
@@ -236,7 +237,9 @@ h2 {
     animation-fill-mode: forwards;
 }
 
-.makeBombs{
+
+
+.makeBombs {
     position: relative;
     height: 80px;
     width: 130px;
@@ -260,6 +263,7 @@ h2 {
     bottom: 320px;
 
 }
+
 .safeContainer {
     position: relative;
     height: 80px;
@@ -310,8 +314,9 @@ h2 {
     /* position: relative; */
 
 }
-.undo{
-      
+
+.undo {
+
     height: 80px;
     width: 130px;
     text-align: center;
@@ -336,7 +341,7 @@ h2 {
 }
 
 .hintsContainer {
-    
+
     height: 80px;
     width: 130px;
     text-align: center;
@@ -358,4 +363,28 @@ h2 {
     cursor: pointer;
     left: 170px;
     bottom: 60px;
+}
+
+.sevenBoom {
+    height: 80px;
+    width: 130px;
+    text-align: center;
+    border-radius: 35px;
+    background-color: #0e3742;
+    padding: 10px;
+    border: 2px solid #265663;
+    padding-bottom: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: #0e3742;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    outline: none;
+    animation: animate1 linear infinite;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    left: 320px;
+    bottom: 330px;
 }
